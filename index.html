@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Organizador de Rebanshos</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row mb-4">
+        <div class="col-6">
+          <h2>adicionar fazenda</h2>
+          <form id="addfarm-form">
+
+            <h4>Nome da Fazenda</h4>
+            <input type="text" class="form-control mr-sm-2" id="nome-farm" placeholder="nome da fazenda">
+
+            <h4>area</h4>
+            <input type="number" class="form-control mr-sm-2" id="area-farm" placeholder="area da fazenda">
+
+            <h4>Estado</h4>
+            <input type="text" class="form-control mr-sm-2" id="estado-farm" placeholder="estado da fazenda">
+
+
+            <button type="submit" class="btn btn-outline-success">adicionar</button>
+
+          </form>
+        </div>
+        <div class="col-4">
+          <h2>fazendas</h2>
+          <ul class="list-group" id="fazendas">
+
+          </ul>
+        </div>
+
+        <script id="fazendas-template" type="text/x-handlebars-template">
+          <li class="list-group-item">
+
+        <button type="button">
+            id: {{idfazenda}}<br>
+            Nome: {{nome}}<br>
+            estado: {{estado}}<br>
+            lotes: {{lotesatuais.length}}
+          </button>
+          </li>
+        </script>
+    ​
+      </div>
+​<h1> Fazenda:<h1></h1></h1>
+  <div class="row">
+    <div class="col-6">
+      <button type="submit" class="btn btn-outline-success">adicionar lote</button>
+    </div>
+
+    <div class="col-6">
+      <button type="submit" class="btn btn-outline-success">venda de lote</button>
+    </div>
+  </div>
+​
+      <div class="row mb-5">
+
+        <div class="col">
+          <form id="addlote-form">
+
+            <h4>dia da compra</h4>
+            <input type="date" class="form-control mr-sm-2" id="datecompra" placeholder="dia da compra">
+
+            <h4>quantidade de animais</h4>
+            <input type="number" class="form-control mr-sm-2" id="lote-quantidade" placeholder="quantidade de animais">
+
+            <h4>Raça dos animais</h4>
+            <input type="text" class="form-control mr-sm-2" id="lote-raca" placeholder="raça dos animais">
+
+            <h4>media de arrobas por animal</h4>
+            <input type="number" class="form-control mr-sm-2" id="lote-arrobas" placeholder="media de arrobas por animal">
+
+            <h4>quantidade de meses dos animais no dia da compra </h4>
+            <input type="number" class="form-control mr-sm-2" id="lote-mesesnacompra" placeholder="meses dos animais na compra">
+
+            <h4>total pago</h4>
+            <input type="number" class="form-control mr-sm-2" id="lote-valor" placeholder="valor total pago">
+
+            <button type="submit" class="btn btn-outline-success">Search</button>
+
+          </form>
+        </div>
+      </div>
+
+​     <div class="row">
+
+        <div class="col-4">
+          <h2>compras</h2>
+          <ul class="list-group" id="compras">
+
+          </ul>
+        </div>
+
+        <div class="col-4">
+          <h2>gado atual</h2>
+          <ul class="list-group" id="gado-atual">
+
+          </ul>
+        </div>
+
+        <div class="col-4">
+          <h2>vendas</h2>
+          <ul class="list-group" id="vendas">
+
+          </ul>
+        </div>
+
+      </div>
+    </div>
+​
+    <script id="compras-template" type="text/x-handlebars-template">
+      <li class="list-group-item">
+
+        <p>
+        id: {{idlote}}<br>
+        Quantidade de animais: {{qtdanimais}}<br>
+        Raça:{{raca}}<br>
+        arroba por animal: {{arrobas}}
+      </p>
+      </li>
+    </script>
+​
+    <script id="atual-template" type="text/x-handlebars-template">
+
+      <li class="list-group-item">
+
+        <p>
+
+        id: {{idlote}}<br>
+        Quantidade de animais: {{qtdanimais}}<br>
+        Raça:{{raca}}<br>
+        arroba por animal: {{arrobas}}
+
+      </p>
+    </li>
+
+    </script>
+
+    <script id="vendas-template" type="text/x-handlebars-template">
+      <li class="list-group-item">
+        {{Title}}
+      </li>
+    </script>
+
+​
+​
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous">
+    </script>
+
+    <script src="script.js"></script>
+  </body>
+</html>
