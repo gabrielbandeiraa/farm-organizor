@@ -13,7 +13,7 @@ function Fazenda(idfazenda, nome, area, estado) { // Farm Object (Farm ID , Name
 	this.area = area
 	this.estado = estado
 	this.compras = []
-    this.lotesatuais = []
+  this.lotesatuais = []
 	this.vendas = []
 
 	this.compralote = function(diadacompra, raca, arrobas, meses, qtdanimais, precototal) {
@@ -71,9 +71,9 @@ $addfarmForm.on("submit", function(){
 
  addfazenda($("#nome-farm").val() , $("#area-farm").val() , $("#estado-farm").val())
  var length = fazendas.length - 1
- var result = fazendas[length]
- appendfazendaResult(result)
-
+ var chooseFarm = fazendas[length]
+ appendfazendaResult(chooseFarm)
+ displayFarm(chooseFarm)
 
  } else {
 	 alert("no")
@@ -87,7 +87,6 @@ $addfarmForm.on("submit", function(){
 			$fazendas.append(resultElement);
 		}
 	})
-
 
 // parte dos lotes
 	var $addloteForm = $("#addlote-form")
@@ -104,42 +103,75 @@ $addfarmForm.on("submit", function(){
 	var atualTemplate = Handlebars.compile(atualSource)
 	var vendasTemplate = Handlebars.compile(vendasSource)
 
-  $addloteForm.on("submit", function(event){
-		 console.log("right");
-		 event.preventDefault()
+	var chooseFarm;
 
-		 // how to only execute search if user has typed something in input field in this case with multiple imputs?
+	$(document).on("click", ".display-more", function(){
 
-  		if ($("#datecompra").val() && $("#lote-raca").val() && $("#lote-arrobas").val() && $("#lote-mesesnacompra").val() && $("#lote-quantidade").val() && $("#lote-valor").val()) {
+		 var fazendaId = $(this).attr("data-fazenda-id") - 1
+		 		 chooseFarm = fazendas[fazendaId]
+		 console.log(chooseFarm);
+		 displayFarm(chooseFarm)
 
-			// how to use an array as argument to a constructor in order to my code be more clean?
-
-	  fazendas[0].compralote($("#datecompra").val(), $("#lote-raca").val(), $("#lote-arrobas").val(), $("#lote-mesesnacompra").val(), $("#lote-quantidade").val(), $("#lote-valor").val())
-		var length = fazendas[0].compras.length - 1
-    var result = fazendas[0].compras[length]
-		appendcompraResult(result)
-		appendatualResult(result)
-
-		} else {
-			alert("no")
-		}
-
-
-				//whats the best way to append this object inside the "compra" e "gado atual" using handlebars?
-
-				function appendcompraResult(result){
-		     var resultElement = comprasTemplate(result);
-		     $compras.append(resultElement);
-			 }
-
-				function appendatualResult(result){
-				var resultElement = atualTemplate(result);
-				$atual.append(resultElement);
-
-
-		   }
-
-
+		// whatever button i clicked, i want that fazenda's info
+		// data attributes in the HTML + $(this) syntax
+		// $(this).getAttribute("data-fazenda-id")
+		// take that info and display in element
 
 	})
+
+
+	 function displayFarm(chooseFarm) {
+		$("#choosed-farm").html(`fazenda: ${chooseFarm.nome}`)
+
+		$("#compras").html(``)
+	  $("#gado-atual").html(``)
+	  $("#vendas").html(``)
+
+
+	chooseFarm.compras.forEach((item, i) => {
+		appendcompraResult(item)
+		appendatualResult(item)
+	});
+
+
+}
+$addloteForm.on("submit", function(event){
+	 console.log("right");
+	 event.preventDefault()
+
+	 // how to only execute search if user has typed something in input field in this case with multiple imputs?
+
+		if ($("#datecompra").val() && $("#lote-raca").val() && $("#lote-arrobas").val() && $("#lote-mesesnacompra").val() && $("#lote-quantidade").val() && $("#lote-valor").val()) {
+
+		// how to use an array as argument to a constructor in order to my code be more clean?
+
+	chooseFarm.compralote($("#datecompra").val(), $("#lote-raca").val(), $("#lote-arrobas").val(), $("#lote-mesesnacompra").val(), $("#lote-quantidade").val(), $("#lote-valor").val())
+	var length = chooseFarm.compras.length - 1
+	var result = chooseFarm.compras[length]
+	console.log(chooseFarm);
+
+	appendcompraResult(result)
+	appendatualResult(result)
+
+	} else {
+		alert("no")
+	}
+
+
+			//whats the best way to append this object inside the "compra" e "gado atual" using handlebars?
+
+})
+
+function appendcompraResult(result){
+ var resultElement = comprasTemplate(result);
+ $compras.append(resultElement);
+}
+
+function appendatualResult(result){
+var resultElement = atualTemplate(result);
+$atual.append(resultElement);
+
+
+}
+
 })

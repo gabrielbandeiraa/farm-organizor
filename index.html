@@ -36,19 +36,19 @@
 
         <script id="fazendas-template" type="text/x-handlebars-template">
           <li class="list-group-item">
-
-        <button type="button">
-            id: {{idfazenda}}<br>
-            Nome: {{nome}}<br>
-            estado: {{estado}}<br>
-            lotes: {{lotesatuais.length}}
-          </button>
+            <p>id: {{idfazenda}}</p>
+            <p>Nome: {{nome}}</p>
+            <p>estado: {{estado}}</p>
+            <p>lotes: {{compras.length}}</p>
+            <button type="button" class="display-more" data-fazenda-id={{idfazenda}}>Display More Info</button>
           </li>
         </script>
     ​
       </div>
-​<h1> Fazenda:<h1></h1></h1>
-  <div class="row">
+
+       <h1 id="choosed-farm"> <p>escolha uma fazenda</p> </h1>
+      <div class="row">
+​
     <div class="col-6">
       <button type="submit" class="btn btn-outline-success">adicionar lote</button>
     </div>
@@ -122,6 +122,7 @@
         Raça:{{raca}}<br>
         arroba por animal: {{arrobas}}
       </p>
+
       </li>
     </script>
 ​
